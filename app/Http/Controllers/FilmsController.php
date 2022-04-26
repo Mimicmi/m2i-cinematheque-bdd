@@ -80,4 +80,17 @@ class FilmsController extends Controller
             'message' => 'Film mis à jour'
         ], 201);
     }
+
+    public function delete($id)
+    {
+        if (!$film = Films::where('id_film', $id)) {
+            return response()->json([
+                'message' => 'Film non trouvé'
+            ], 404);
+        }
+        $film->delete();
+        return response()->json([
+            'message' => 'Film supprimé'
+        ], 201);
+    }
 }
